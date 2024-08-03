@@ -5,7 +5,7 @@ import 'dart:convert';
 
 import '../secs/secrets.dart'; // For JSON encoding and decoding
 
-Future<Employee> fetchEmployeeDetails(String _id) async {
+Future<Employee> getEmployeeDetails(String _id) async {
   Employee emp;
   try {
     // debugPrint("debug: Here");
