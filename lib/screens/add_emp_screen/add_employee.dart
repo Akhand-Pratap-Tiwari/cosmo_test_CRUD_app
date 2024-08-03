@@ -36,7 +36,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
   String? city;
   String? country;
   String? zipCode;
-  ContactMethod? contactMethod;
+  ContactMethod contactMethod = ContactMethod.PHONE;
   String? contactValue;
 
   @override
@@ -173,6 +173,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Processing Data')),
                     );
+                    
                     createEmployee(
                       Employee(
                         null,
@@ -182,7 +183,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                         city: city!,
                         country: country!,
                         zipCode: zipCode!,
-                        contactMethod: contactMethod!,
+                        contactMethod: contactMethod,
                         contactValue: contactValue!,
                       ),
                     );
