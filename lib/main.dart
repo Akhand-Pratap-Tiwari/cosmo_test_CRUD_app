@@ -1,4 +1,4 @@
-import 'package:cosmo_test_app/univ_design_params.dart';
+import 'package:cosmo_test_app/univ_params_amd_comp.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home_screen/home_screen.dart';

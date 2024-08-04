@@ -1,6 +1,5 @@
-import 'package:cosmo_test_app/univ_design_params.dart';
+import 'package:cosmo_test_app/univ_params_amd_comp.dart';
 import 'package:flutter/material.dart';
-
 import '../../api_calling_funcs/create_employee.dart';
 import '../../models/employee.dart';
 import 'submit_button.dart';
@@ -12,7 +11,11 @@ class CreateEmployeeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getDefaultAppBar(title: "Add Employee"),
-      body: const SingleChildScrollView(child: EmployeeCreationForm()),
+      body: const CustomLottieBg(
+        child: SingleChildScrollView(
+          child: EmployeeCreationForm(),
+        ),
+      ),
     );
   }
 }
@@ -139,7 +142,8 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                       decoration:
                           const InputDecoration(label: Text("Contact Info")),
                       validator: (inputContactValue) {
-                        if (inputContactValue == null || inputContactValue.isEmpty) {
+                        if (inputContactValue == null ||
+                            inputContactValue.isEmpty) {
                           return 'Please enter valid PHONE/EMAIL';
                         }
                         contactValue = inputContactValue;
@@ -154,11 +158,14 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
             Center(
               child: SubmitButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {  //If current inputs are valid
-                    ScaffoldMessenger.of(context).showSnackBar( //then show data being processed
+                  if (_formKey.currentState!.validate()) {
+                    //If current inputs are valid
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      //then show data being processed
                       const SnackBar(content: Text('Processing Data')),
                     );
-                    showDialog( //Show loading screen (Later removed See at *)
+                    showDialog(
+                      //Show loading screen (Later removed See at *)
                       context: context,
                       barrierDismissible: false,
                       builder: (context) => const AlertDialog(
@@ -168,7 +175,8 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                         ),
                       ),
                     );
-                    createEmployee( //Call API function and pass the fiels
+                    createEmployee(
+                      //Call API function and pass the fiels
                       Employee(
                         null,
                         name: name!,
@@ -180,7 +188,8 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                         contactMethod: contactMethod,
                         contactValue: contactValue!,
                       ),
-                    ).then(            // * Remove the loading screen After creation
+                    ).then(
+                      // * Remove the loading screen After creation
                       (value) => Navigator.pop(context),
                     );
                   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../univ_design_params.dart';
+import '../../univ_params_amd_comp.dart';
 
 class DetailsListTile extends StatelessWidget {
   final String text;

@@ -1,4 +1,4 @@
-import 'package:cosmo_test_app/univ_design_params.dart';
+import 'package:cosmo_test_app/univ_params_amd_comp.dart';
 import 'package:flutter/material.dart';
 
 class NoEmployeesAddedBanner extends StatelessWidget {
@@ -18,7 +18,7 @@ class NoEmployeesAddedBanner extends StatelessWidget {
                 // colorBlendMode: BlendMode.darken,
               ),
             ),
-            Divider(),
+            const Divider(),
             const Text(
                 "Oops! looks like there is no one added in the list.\nTry to refresh or add employees."),
           ],

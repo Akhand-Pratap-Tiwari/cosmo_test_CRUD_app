@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/employee.dart';
-import '../../univ_design_params.dart';
+import '../../univ_params_amd_comp.dart';
 import '../emp_details_screen/emp_details_screen.dart';
 
 class EmployeeListTile extends StatelessWidget {
