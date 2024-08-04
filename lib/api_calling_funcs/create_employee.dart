@@ -5,7 +5,7 @@ import 'dart:convert';
 
 import '../secs/secrets.dart'; // For JSON encoding and decoding
 
-void createEmployee(Employee emp) async {
+Future<void> createEmployee(Employee emp) async {
   // Employee emp;
   try {
     // var json = emp.toJson();

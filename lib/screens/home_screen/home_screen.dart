@@ -1,11 +1,20 @@
+import 'package:cosmo_test_app/api_calling_funcs/delete_employee.dart';
 import 'package:cosmo_test_app/api_calling_funcs/list_employee.dart';
 import 'package:cosmo_test_app/screens/add_emp_screen/add_employee.dart';
 import 'package:flutter/material.dart';
 import '../../models/employee.dart';
+import '../../univ_design_params.dart';
 import '../emp_details_screen/emp_details_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Widget empList = EmployeesList();
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +25,27 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
-        child: EmployeesList(),
+        child: empList,
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddEmployeeScreen(),));
-          
+          Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddEmployeeScreen()))
+              .then(
+            (value) {
+              setState(() {
+                empList = EmployeesList(
+                  key: GlobalKey(),
+                );
+              });
+            },
+          );
         },
         label: Text("Add Employee"),
         icon: Icon(Icons.add),
       ),
     );
+    ;
   }
 }
 
@@ -43,6 +62,7 @@ class EmployeesListState extends State<EmployeesList> {
   final int limit = 10;
   int offset = 0;
   void loadEmployeesList() {
+    // locKey();
     _isLoading = true;
     getEmployeeList(limit: limit, offset: offset).then((empList) => {
           setState(() {
@@ -62,6 +82,7 @@ class EmployeesListState extends State<EmployeesList> {
 
   @override
   Widget build(BuildContext context) {
+    // return NoEmployeesAdded();
     // var response = http.get(Uri.parse('baseApiUrl?limit=$limit&offset=$offset'));
     return !_isLoading && employees.isEmpty
         ? NoEmployeesAdded()
@@ -76,6 +97,7 @@ class EmployeesListState extends State<EmployeesList> {
               return false;
             },
             child: ListView.builder(
+              padding: EdgeInsets.all(8.0),
               itemCount: employees.length + 1,
               itemBuilder: (context, index) {
                 if (index == employees.length) {
@@ -83,15 +105,40 @@ class EmployeesListState extends State<EmployeesList> {
                       ? Center(child: CircularProgressIndicator())
                       : SizedBox.shrink();
                 }
-                return ListTile(
-                  title: Text(employees[index].name),
-                  subtitle: Text(employees[index].empId),
-                  onTap: () => Navigator.push(
+                return Container(
+                  // padding: EdgeInsets.all(4.0),
+                  margin: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: defaultBorderRadius,
+                    color: Colors.amber,
+                  ),
+                  child: ListTile(
+                    trailing: IconButton(
+                      color: Colors.red,
+                      onPressed: () =>
+                          deleteEmployee(employees[index].id!).then(
+                        (_) => setState(() {
+                          // limit = 10;
+                          offset = 0;
+                          employees = [];
+                          loadEmployeesList();
+                        }),
+                      ),
+                      icon: Icon(Icons.delete),
+                    ),
+                    shape: CircleBorder(),
+                    // tileColor: Colors.amber,
+
+                    title: Text(employees[index].name),
+                    subtitle: Text(employees[index].empId),
+                    onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
                             EmployeeDetailsScreen(employee: employees[index]),
-                      )),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
@@ -105,8 +152,15 @@ class NoEmployeesAdded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-          "Oops looks like there is no one added in the list.\nTry to refresh or add employees."),
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.purpleAccent.withOpacity(0.3),
+          borderRadius: defaultBorderRadius,
+        ),
+        child: Text(
+            "Oops looks like there is no one added in the list.\nTry to refresh or add employees."),
+      ),
     );
   }
 }

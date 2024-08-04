@@ -1,7 +1,7 @@
 enum ContactMethod { EMAIL, PHONE }
 
 class Employee {
-  String? _id;
+  String? id;
   String name;
   String empId;
   String addLine1;
@@ -13,7 +13,7 @@ class Employee {
 
 
   Employee(
-    this._id,
+    this.id,
     {
     required this.name,
     required this.empId,
@@ -44,7 +44,7 @@ class Employee {
 
   factory Employee.fromJson(Map<String, dynamic> json) {
     return Employee(
-        json['id'],
+        json['_id'],
         name: json['name'],
         empId: json['empId'],
         addLine1: json['addLine1'],

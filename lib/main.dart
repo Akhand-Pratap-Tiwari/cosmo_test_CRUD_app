@@ -1,3 +1,4 @@
+import 'package:cosmo_test_app/univ_design_params.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home_screen/home_screen.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+              border: OutlineInputBorder(borderRadius: defaultBorderRadius),
             ),
         useMaterial3: true,
       ),

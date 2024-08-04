@@ -1,3 +1,4 @@
+import 'package:cosmo_test_app/univ_design_params.dart';
 import 'package:flutter/material.dart';
 
 import '../../api_calling_funcs/create_employee.dart';
@@ -37,6 +38,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
   String? country;
   String? zipCode;
   ContactMethod contactMethod = ContactMethod.PHONE;
+  String dropDownValue = "PHONE";
   String? contactValue;
 
   @override
@@ -121,26 +123,26 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  DropdownButton(
-                    // underline: ,
-                    borderRadius: BorderRadius.circular(16.0),
-                    padding: EdgeInsets.only(right: 8.0),
-                    value: "PHONE",
-                    items: [
-                      DropdownMenuItem(
-                        child: Text("Email"),
-                        value: "EMAIL",
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: DropdownMenu(
+                      inputDecorationTheme: InputDecorationTheme(
+                        border: OutlineInputBorder(
+                          borderRadius: defaultBorderRadius,
+                        ),
                       ),
-                      DropdownMenuItem(
-                        child: Text("Phone"),
-                        value: "PHONE",
-                      )
-                    ],
-                    onChanged: (value) {
-                      contactMethod = (value == "EMAIL")
-                          ? ContactMethod.EMAIL
-                          : ContactMethod.PHONE;
-                    },
+                      initialSelection: "PHONE",
+                      dropdownMenuEntries: [
+                        DropdownMenuEntry(value: "EMAIL", label: "Email"),
+                        DropdownMenuEntry(value: "PHONE", label: "Phone"),
+                      ],
+                      onSelected: (value) {
+                        dropDownValue = value!;
+                        contactMethod = (value == "EMAIL")
+                            ? ContactMethod.EMAIL
+                            : ContactMethod.PHONE;
+                      },
+                    ),
                   ),
                   Flexible(
                     child: TextFormField(
@@ -173,7 +175,16 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Processing Data')),
                     );
-                    
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        content: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    );
                     createEmployee(
                       Employee(
                         null,
@@ -186,6 +197,8 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                         contactMethod: contactMethod,
                         contactValue: contactValue!,
                       ),
+                    ).then(
+                      (value) => Navigator.pop(context),
                     );
                   }
                 },
