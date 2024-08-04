@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cosmo_test_app/univ_design_params.dart';
 import 'package:flutter/material.dart';
 
