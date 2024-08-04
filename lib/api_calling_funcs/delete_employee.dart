@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../secs/secrets.dart'; // For JSON encoding and decoding
+import '../secs/secrets.dart';
 
 Future<void> deleteEmployee(String id) async {
   try {

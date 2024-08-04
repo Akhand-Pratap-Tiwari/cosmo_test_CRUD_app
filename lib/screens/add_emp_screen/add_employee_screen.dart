@@ -30,7 +30,6 @@ class EmployeeCreationForm extends StatefulWidget {
 
 class EmployeeCreationFormState extends State<EmployeeCreationForm> {
   final _formKey = GlobalKey<FormState>();
-  // String? _id;
   String? name;
   String? empId;
   String? addLine1;
@@ -51,7 +50,6 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
-              // initialValue: ,
               decoration: const InputDecoration(label: Text("Name")),
               validator: (iName) {
                 if (iName == null || iName.trim().isEmpty) {
@@ -61,7 +59,6 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                 return null;
               },
             ),
-            // Spacer(),
             const Divider(color: Colors.transparent),
             TextFormField(
               decoration: const InputDecoration(label: Text("Emplyee Id")),
@@ -202,7 +199,6 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                     );
                   }
                 },
-                // child: const Text('Submit'),
               ),
             ),
           ],

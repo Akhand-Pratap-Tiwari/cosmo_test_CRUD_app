@@ -57,17 +57,3 @@ class Employee {
         contactValue: json['contactValue']);
   }
 }
-
-// Employee jsonToEmployee(Map<String, String> empDetails) {
-//   return Employee(
-//       name: empDetails['name']!,
-//       empId: empDetails['empId']!,
-//       addLine1: empDetails['addLine1']!,
-//       city: empDetails['city']!,
-//       country: empDetails['country']!,
-//       zipCode: empDetails['zipCode']!,
-//       contactMethod: empDetails['contactMethod']! == 'EMAIL'
-//           ? ContactMethod.EMAIL
-//           : ContactMethod.PHONE,
-//       contactValue: empDetails['contactValue']!);
-// }
