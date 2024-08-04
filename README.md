@@ -4,7 +4,7 @@ Simple CRUD app using CosmoCloud service.
 
 ## Getting Started
 
-This project demonstrates the use Cosmocloud API for CRUD operations.
+This project demonstrates the use of Cosmocloud API to build a simple app for CRUD operations.
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
@@ -14,7 +14,7 @@ samples, guidance on mobile development, and a full API reference.
 In order to run the demo app just download and install `app-release.apk` from the `main` branch.
 
 ## Testing and setting up local environment
-- First you need to install Flutter and dart. Follow the aforemention article to do so.
+- First you need to install Flutter and dart. Follow the aforementioned article to do so.
 - Next set up the [CosmoCloud APIs and MongoDB](https://docs.cosmocloud.io/getting-started).
 - For DB model on CosmoCloud use following json template
 ```
