@@ -37,6 +37,7 @@ class EmployeesListState extends State<EmployeesList> {
 
   @override
   Widget build(BuildContext context) {
+    // return NoEmployeesAddedBanner();
     return !_isLoading && _employees.isEmpty  //If not loading and list is empty then 
         ? const NoEmployeesAddedBanner()      //show empty banner
         : NotificationListener<ScrollNotification>( //Scroll notifier used to load more item on scroll end
