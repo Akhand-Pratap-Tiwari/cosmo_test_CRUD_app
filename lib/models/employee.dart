@@ -26,7 +26,7 @@ class Employee {
   });
 
   String getAddress() {
-    return addLine1 + city + country + zipCode;
+    return addLine1 + " " + city + " " + country + " - " + zipCode;
   }
 
   Map<String, String> toJson() {

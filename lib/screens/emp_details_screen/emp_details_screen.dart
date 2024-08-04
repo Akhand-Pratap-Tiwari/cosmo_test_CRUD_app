@@ -1,4 +1,6 @@
 import 'package:cosmo_test_app/models/employee.dart';
+import 'package:cosmo_test_app/screens/emp_details_screen/details_list_tile.dart';
+import 'package:cosmo_test_app/univ_design_params.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeDetailsScreen extends StatelessWidget {
@@ -11,49 +13,31 @@ class EmployeeDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Details"),
-        centerTitle: true,
-      ),
-      body: Row(
-        // direction: Axis.horizontal,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text("Name: "),
-              Text("Employee Id: "),
-              Text("Address Line 1: "),
-              Text("City: "),
-              Text("Country: "),
-              Text("Zip Code: "),
-              Text("Contact Method: "),
-              Text("Contact Value: "),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 50.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(employee.name),
-                Text(employee.empId),
-                Text(employee.addLine1),
-                Text(employee.city),
-                Text(employee.country),
-                Text(employee.zipCode),
-                Text(employee.contactMethod == ContactMethod.EMAIL
-                    ? 'EMAIL'
-                    : 'PHONE'),
-                Text(employee.contactValue),
-                // VerticalDivider()
-              ],
+        appBar: AppBar(
+          title: Text("Details"),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card.outlined(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(employee.name, style: TextStyle(fontSize: 48),),
+                  ListView(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.all(8.0),
+                    children: [
+                      DetailsListTile(txt: employee.empId, icon: Icons.abc,),
+                      DetailsListTile(txt: employee.getAddress(), icon: Icons.home_filled,),
+                      DetailsListTile(txt: employee.contactValue, icon: employee.contactMethod == ContactMethod.EMAIL ? Icons.email : Icons.phone),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-          // Container()
-        ],
-      ),
-    );
+        ));
   }
 }
