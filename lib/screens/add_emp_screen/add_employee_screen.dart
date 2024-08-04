@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 
 import '../../api_calling_funcs/create_employee.dart';
 import '../../models/employee.dart';
+import 'submit_button.dart';
 
-class AddEmployeeScreen extends StatelessWidget {
-  const AddEmployeeScreen({super.key});
+class CreateEmployeeScreen extends StatelessWidget {
+  const CreateEmployeeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Add Employee"),
-        centerTitle: true,
-      ),
+      appBar: getDefaultAppBar(title: "Add Employee"),
       body: const SingleChildScrollView(child: EmployeeCreationForm()),
     );
   }
@@ -51,66 +49,66 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
           children: [
             TextFormField(
               decoration: const InputDecoration(label: Text("Name")),
-              validator: (iName) {
-                if (iName == null || iName.trim().isEmpty) {
+              validator: (inputName) {
+                if (inputName == null || inputName.trim().isEmpty) {
                   return 'Please enter valid name';
                 }
-                name = iName;
+                name = inputName;
                 return null;
               },
             ),
             const Divider(color: Colors.transparent),
             TextFormField(
               decoration: const InputDecoration(label: Text("Emplyee Id")),
-              validator: (iEmpId) {
-                if (iEmpId == null || iEmpId.trim().isEmpty) {
+              validator: (inputEmpId) {
+                if (inputEmpId == null || inputEmpId.trim().isEmpty) {
                   return 'Please enter valid id';
                 }
-                empId = iEmpId;
+                empId = inputEmpId;
                 return null;
               },
             ),
             const Divider(color: Colors.transparent),
             TextFormField(
               decoration: const InputDecoration(label: Text("Address Line 1")),
-              validator: (iAddLine1) {
-                if (iAddLine1 == null || iAddLine1.trim().isEmpty) {
+              validator: (inputAddLine1) {
+                if (inputAddLine1 == null || inputAddLine1.trim().isEmpty) {
                   return 'Please enter valid address';
                 }
-                addLine1 = iAddLine1;
+                addLine1 = inputAddLine1;
                 return null;
               },
             ),
             const Divider(color: Colors.transparent),
             TextFormField(
               decoration: const InputDecoration(label: Text("City")),
-              validator: (iCity) {
-                if (iCity == null || iCity.trim().isEmpty) {
+              validator: (inputCity) {
+                if (inputCity == null || inputCity.trim().isEmpty) {
                   return 'Please enter valid city';
                 }
-                city = iCity;
+                city = inputCity;
                 return null;
               },
             ),
             const Divider(color: Colors.transparent),
             TextFormField(
               decoration: const InputDecoration(label: Text("Country")),
-              validator: (iCountry) {
-                if (iCountry == null || iCountry.trim().isEmpty) {
+              validator: (inputCountry) {
+                if (inputCountry == null || inputCountry.trim().isEmpty) {
                   return 'Please enter valid country';
                 }
-                country = iCountry;
+                country = inputCountry;
                 return null;
               },
             ),
             const Divider(color: Colors.transparent),
             TextFormField(
               decoration: const InputDecoration(label: Text("Zip Code")),
-              validator: (iZipCode) {
-                if (iZipCode == null || iZipCode.trim().isEmpty) {
+              validator: (inputZipCode) {
+                if (inputZipCode == null || inputZipCode.trim().isEmpty) {
                   return 'Please enter valid zip code';
                 }
-                zipCode = iZipCode;
+                zipCode = inputZipCode;
                 return null;
               },
             ),
@@ -123,11 +121,6 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: DropdownMenu(
-                      inputDecorationTheme: InputDecorationTheme(
-                        border: OutlineInputBorder(
-                          borderRadius: defaultBorderRadius,
-                        ),
-                      ),
                       initialSelection: "PHONE",
                       dropdownMenuEntries: const [
                         DropdownMenuEntry(value: "EMAIL", label: "Email"),
@@ -143,12 +136,13 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                   ),
                   Flexible(
                     child: TextFormField(
-                      decoration: const InputDecoration(label: Text("Contact Info")),
-                      validator: (iContactValue) {
-                        if (iContactValue == null || iContactValue.isEmpty) {
+                      decoration:
+                          const InputDecoration(label: Text("Contact Info")),
+                      validator: (inputContactValue) {
+                        if (inputContactValue == null || inputContactValue.isEmpty) {
                           return 'Please enter valid PHONE/EMAIL';
                         }
-                        contactValue = iContactValue;
+                        contactValue = inputContactValue;
                         return null;
                       },
                     ),
@@ -158,21 +152,13 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
             ),
             const Divider(color: Colors.transparent),
             Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink,
-                  minimumSize: const Size(double.infinity, 50),
-                ),
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.white),
-                ),
+              child: SubmitButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                  if (_formKey.currentState!.validate()) {  //If current inputs are valid
+                    ScaffoldMessenger.of(context).showSnackBar( //then show data being processed
                       const SnackBar(content: Text('Processing Data')),
                     );
-                    showDialog(
+                    showDialog( //Show loading screen (Later removed See at *)
                       context: context,
                       barrierDismissible: false,
                       builder: (context) => const AlertDialog(
@@ -182,7 +168,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                         ),
                       ),
                     );
-                    createEmployee(
+                    createEmployee( //Call API function and pass the fiels
                       Employee(
                         null,
                         name: name!,
@@ -194,7 +180,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                         contactMethod: contactMethod,
                         contactValue: contactValue!,
                       ),
-                    ).then(
+                    ).then(            // * Remove the loading screen After creation
                       (value) => Navigator.pop(context),
                     );
                   }

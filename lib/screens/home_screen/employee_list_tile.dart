@@ -5,48 +5,53 @@ import '../../univ_design_params.dart';
 import '../emp_details_screen/emp_details_screen.dart';
 
 class EmployeeListTile extends StatelessWidget {
-  final void Function() onPressed;
-  final List<Employee> employees;
+  final void Function() onPressedDeleteFunction;
+  final Employee employee;
   final int index;
 
   const EmployeeListTile({
     super.key,
-    required this.onPressed,
-    required this.employees,
+    required this.onPressedDeleteFunction,
+    required this.employee,
     required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: EdgeInsets.all(4.0),
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Colors.pinkAccent, Colors.amber],
-          stops: [0.0, 0.8],
+        gradient: LinearGradient(
+          colors: [Colors.indigoAccent.shade400, Colors.cyanAccent.shade400],
+          stops: const [0.2, 1.0],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: defaultBorderRadius,
-        color: Colors.amber,
+        // color: Colors.amber,
       ),
       child: ListTile(
-        trailing: IconButton(
-          color: Colors.red,
-          onPressed: onPressed,
-          icon: const Icon(Icons.delete),
-        ),
+        title: Text(employee.name),
         shape: const CircleBorder(),
-        // tileColor: Colors.amber,
+        subtitle: Text(employee.empId),
+        trailing: Container(
+          decoration: BoxDecoration(
+            borderRadius: defaultBorderRadius/1.2,
+            border: Border.all(color: Colors.red, width: 2),
+          ),
+          child: IconButton(
+            color: Colors.red,
+            onPressed: onPressedDeleteFunction,
+            icon: const Icon(Icons.delete),
+          ),
+        ),
 
-        title: Text(employees[index].name),
-        subtitle: Text(employees[index].empId),
+        //Navigate to details screen on tap 
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) =>
-                EmployeeDetailsScreen(employee: employees[index]),
+                EmployeeDetailsScreen(employee: employee),
           ),
         ),
       ),

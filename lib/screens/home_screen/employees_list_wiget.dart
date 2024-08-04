@@ -14,17 +14,17 @@ class EmployeesList extends StatefulWidget {
 }
 
 class EmployeesListState extends State<EmployeesList> {
-  List<Employee> _employees = [];
-  bool _isLoading = false;
-  final int _limit = 10;
-  int _offset = 0;
+  List<Employee> _employees = []; //Contains Employees to be rendered on screen
+  bool _isLoading = false;        //Whether more employees are being fethced
+  final int _limit = 10;          //Amount of employees to fetch at once
+  int _offset = 0;                //Index Of Last fetched employee
   void loadEmployeesList() {
-    _isLoading = true;
-    getEmployeeList(limit: _limit, offset: _offset).then((empList) => {
-          setState(() {
-            _employees.addAll(empList);
-            _isLoading = false;
-            _offset += _limit;
+    _isLoading = true;            //Go Into Loading mode
+    getEmployeeList(limit: _limit, offset: _offset).then((empList) => { //Get employee list via API and populate _employees
+          setState(() {                     //Afterwards call set state to refresh
+            _employees.addAll(empList);     //Add employess to the list
+            _isLoading = false;             //Get out of loading state
+            _offset += _limit;              //Index of next batch
           })
         });
   }
@@ -32,39 +32,43 @@ class EmployeesListState extends State<EmployeesList> {
   @override
   void initState() {
     super.initState();
-    loadEmployeesList();
+    loadEmployeesList();  //Inital load
   }
 
   @override
   Widget build(BuildContext context) {
-    return !_isLoading && _employees.isEmpty
-        ? const NoEmployeesAddedBanner()
-        : NotificationListener<ScrollNotification>(
+    return !_isLoading && _employees.isEmpty  //If not loading and list is empty then 
+        ? const NoEmployeesAddedBanner()      //show empty banner
+        : NotificationListener<ScrollNotification>( //Scroll notifier used to load more item on scroll end
             onNotification: (ScrollNotification scrollInfo) {
+              //If scroll ends and not in loading state then fetch more
               if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent && !_isLoading) {
                 loadEmployeesList();
                 return true;
               }
               return false;
             },
+            //If list is not empty and not in loading state show it
             child: ListView.builder(
               padding: const EdgeInsets.all(8.0),
               itemCount: _employees.length + 1,
               itemBuilder: (context, index) {
                 if (index == _employees.length) {
-                  return _isLoading
+                  return _isLoading //If loading show loading indicator else render an empty box below the list
                       ? const Center(child: CircularProgressIndicator())
-                      : const SizedBox.shrink();
+                      : const SizedBox(height: 75,);  //Box helps to deal with last not being not properly visible
                 }
                 return EmployeeListTile(
-                  onPressed: () => deleteEmployee(_employees[index].id!).then(
+                  //delete callback
+                  onPressedDeleteFunction: () => deleteEmployee(_employees[index].id!).then(
                     (_) => setState(() {
+                      //If delete button is pressed them reload the list. 
                       _offset = 0;
                       _employees = [];
                       loadEmployeesList();
                     }),
                   ),
-                  employees: _employees,
+                  employee: _employees[index], //Pass employee details to be rendered
                   index: index,
                 );
               },
