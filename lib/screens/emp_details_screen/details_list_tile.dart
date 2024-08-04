@@ -11,7 +11,7 @@ class DetailsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
           borderRadius: defaultBorderRadius / 2, color: Colors.orange),
       child: ListTile(

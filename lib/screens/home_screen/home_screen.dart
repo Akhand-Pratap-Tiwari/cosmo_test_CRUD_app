@@ -14,13 +14,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Widget empList = EmployeesList();
+  Widget empList = const EmployeesList();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Employees'),
+        title: const Text('Employees'),
         centerTitle: true,
       ),
       body: Padding(
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         foregroundColor: Colors.white,
         onPressed: () {
           Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddEmployeeScreen()))
+                  MaterialPageRoute(builder: (context) => const AddEmployeeScreen()))
               .then(
             (value) {
               setState(() {
@@ -43,11 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           );
         },
-        label: Text("Add Employee"),
-        icon: Icon(Icons.add),
+        label: const Text("Add Employee"),
+        icon: const Icon(Icons.add),
       ),
     );
-    ;
   }
 }
 
@@ -87,7 +86,7 @@ class EmployeesListState extends State<EmployeesList> {
     // return NoEmployeesAdded();
     // var response = http.get(Uri.parse('baseApiUrl?limit=$limit&offset=$offset'));
     return !_isLoading && employees.isEmpty
-        ? NoEmployeesAdded()
+        ? const NoEmployeesAdded()
         : NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
               if (scrollInfo.metrics.pixels ==
@@ -99,19 +98,19 @@ class EmployeesListState extends State<EmployeesList> {
               return false;
             },
             child: ListView.builder(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               itemCount: employees.length + 1,
               itemBuilder: (context, index) {
                 if (index == employees.length) {
                   return _isLoading
-                      ? Center(child: CircularProgressIndicator())
-                      : SizedBox.shrink();
+                      ? const Center(child: CircularProgressIndicator())
+                      : const SizedBox.shrink();
                 }
                 return Container(
                   // padding: EdgeInsets.all(4.0),
-                  margin: EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       colors: [Colors.pinkAccent, Colors.amber],
                       stops: [0.0, 0.8],
                       begin: Alignment.topLeft,
@@ -132,9 +131,9 @@ class EmployeesListState extends State<EmployeesList> {
                           loadEmployeesList();
                         }),
                       ),
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                     ),
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     // tileColor: Colors.amber,
                   
                     title: Text(employees[index].name),
@@ -163,7 +162,7 @@ class NoEmployeesAdded extends StatelessWidget {
       child: Column(
         children: [
           Image.asset("assets/img/undraw_No_data_re_kwbl.png"),
-          Text(
+          const Text(
               "Oops looks like there is no one added in the list.\nTry to refresh or add employees."),
         ],
       ),

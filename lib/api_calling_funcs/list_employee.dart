@@ -14,7 +14,7 @@ Future<List<Employee>> getEmployeeList(
     if (response.statusCode == 200) {
       List<dynamic> jsonData = json.decode(response.body)['data'];
       employeeList = jsonData.map((json) => Employee.fromJson(json)).toList();
-      debugPrint("debug: " + employeeList.toString());
+      debugPrint("debug: $employeeList");
     } else {
       throw Exception('Failed to load employees');
     }

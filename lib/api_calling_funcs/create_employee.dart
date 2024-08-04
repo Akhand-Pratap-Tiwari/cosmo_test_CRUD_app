@@ -20,6 +20,6 @@ Future<void> createEmployee(Employee emp) async {
     }
     // return emp;
   } catch (e) {
-    debugPrint("debug: " + e.toString());
+    debugPrint("debug: $e");
   }
 }

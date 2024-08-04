@@ -5,11 +5,11 @@ import 'dart:convert';
 
 import '../secs/secrets.dart'; // For JSON encoding and decoding
 
-Future<Employee> getEmployeeDetails(String _id) async {
+Future<Employee> getEmployeeDetails(String id) async {
   Employee emp;
   try {
     // debugPrint("debug: Here");
-    final response = await http.get(Uri.parse('$baseApiUrl/$_id'), headers: defaultHeader);
+    final response = await http.get(Uri.parse('$baseApiUrl/$id'), headers: defaultHeader);
     if (response.statusCode == 200) {
       dynamic jsonData = json.decode(response.body);
       emp = Employee.fromJson(jsonData);
@@ -19,7 +19,7 @@ Future<Employee> getEmployeeDetails(String _id) async {
     return emp;
   } catch (e) {
     debugPrint(e.toString());
-    return Employee(_id,
+    return Employee(id,
         name: 'None',
         empId: 'None',
         addLine1: 'None',

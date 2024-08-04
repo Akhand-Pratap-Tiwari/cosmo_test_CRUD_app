@@ -11,10 +11,10 @@ class AddEmployeeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Employee"),
+        title: const Text("Add Employee"),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(child: EmployeeCreationForm()),
+      body: const SingleChildScrollView(child: EmployeeCreationForm()),
     );
   }
 }
@@ -52,7 +52,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
           children: [
             TextFormField(
               // initialValue: ,
-              decoration: InputDecoration(label: Text("Name")),
+              decoration: const InputDecoration(label: Text("Name")),
               validator: (iName) {
                 if (iName == null || iName.trim().isEmpty) {
                   return 'Please enter valid name';
@@ -62,9 +62,9 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
               },
             ),
             // Spacer(),
-            Divider(color: Colors.transparent),
+            const Divider(color: Colors.transparent),
             TextFormField(
-              decoration: InputDecoration(label: Text("Emplyee Id")),
+              decoration: const InputDecoration(label: Text("Emplyee Id")),
               validator: (iEmpId) {
                 if (iEmpId == null || iEmpId.trim().isEmpty) {
                   return 'Please enter valid id';
@@ -73,9 +73,9 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                 return null;
               },
             ),
-            Divider(color: Colors.transparent),
+            const Divider(color: Colors.transparent),
             TextFormField(
-              decoration: InputDecoration(label: Text("Address Line 1")),
+              decoration: const InputDecoration(label: Text("Address Line 1")),
               validator: (iAddLine1) {
                 if (iAddLine1 == null || iAddLine1.trim().isEmpty) {
                   return 'Please enter valid address';
@@ -84,9 +84,9 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                 return null;
               },
             ),
-            Divider(color: Colors.transparent),
+            const Divider(color: Colors.transparent),
             TextFormField(
-              decoration: InputDecoration(label: Text("City")),
+              decoration: const InputDecoration(label: Text("City")),
               validator: (iCity) {
                 if (iCity == null || iCity.trim().isEmpty) {
                   return 'Please enter valid city';
@@ -95,9 +95,9 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                 return null;
               },
             ),
-            Divider(color: Colors.transparent),
+            const Divider(color: Colors.transparent),
             TextFormField(
-              decoration: InputDecoration(label: Text("Country")),
+              decoration: const InputDecoration(label: Text("Country")),
               validator: (iCountry) {
                 if (iCountry == null || iCountry.trim().isEmpty) {
                   return 'Please enter valid country';
@@ -106,9 +106,9 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                 return null;
               },
             ),
-            Divider(color: Colors.transparent),
+            const Divider(color: Colors.transparent),
             TextFormField(
-              decoration: InputDecoration(label: Text("Zip Code")),
+              decoration: const InputDecoration(label: Text("Zip Code")),
               validator: (iZipCode) {
                 if (iZipCode == null || iZipCode.trim().isEmpty) {
                   return 'Please enter valid zip code';
@@ -117,7 +117,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                 return null;
               },
             ),
-            Divider(color: Colors.transparent),
+            const Divider(color: Colors.transparent),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Row(
@@ -132,7 +132,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                         ),
                       ),
                       initialSelection: "PHONE",
-                      dropdownMenuEntries: [
+                      dropdownMenuEntries: const [
                         DropdownMenuEntry(value: "EMAIL", label: "Email"),
                         DropdownMenuEntry(value: "PHONE", label: "Phone"),
                       ],
@@ -146,7 +146,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                   ),
                   Flexible(
                     child: TextFormField(
-                      decoration: InputDecoration(label: Text("Contact Info")),
+                      decoration: const InputDecoration(label: Text("Contact Info")),
                       validator: (iContactValue) {
                         if (iContactValue == null || iContactValue.isEmpty) {
                           return 'Please enter valid PHONE/EMAIL';
@@ -159,14 +159,14 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                 ],
               ),
             ),
-            Divider(color: Colors.transparent),
+            const Divider(color: Colors.transparent),
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.pink,
-                  minimumSize: Size(double.infinity, 50),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
-                child: Text(
+                child: const Text(
                   'Submit',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -178,7 +178,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
                     showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (context) => AlertDialog(
+                      builder: (context) => const AlertDialog(
                         backgroundColor: Colors.transparent,
                         content: Center(
                           child: CircularProgressIndicator(),

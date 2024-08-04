@@ -1,6 +1,5 @@
 import 'package:cosmo_test_app/models/employee.dart';
 import 'package:cosmo_test_app/screens/emp_details_screen/details_list_tile.dart';
-import 'package:cosmo_test_app/univ_design_params.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeDetailsScreen extends StatelessWidget {
@@ -14,7 +13,7 @@ class EmployeeDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Details"),
+          title: const Text("Details"),
           centerTitle: true,
         ),
         body: Center(
@@ -24,10 +23,10 @@ class EmployeeDetailsScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(employee.name, style: TextStyle(fontSize: 48),),
+                  Text(employee.name, style: const TextStyle(fontSize: 48),),
                   ListView(
                     shrinkWrap: true,
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     children: [
                       DetailsListTile(txt: employee.empId, icon: Icons.abc,),
                       DetailsListTile(txt: employee.getAddress(), icon: Icons.home_filled,),
