@@ -16,6 +16,8 @@ class EmployeeDetailsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Row(
+        // direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -30,21 +32,26 @@ class EmployeeDetailsScreen extends StatelessWidget {
               Text("Contact Value: "),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(employee.name),
-              Text(employee.empId),
-              Text(employee.addLine1),
-              Text(employee.city),
-              Text(employee.country),
-              Text(employee.zipCode),
-              Text(employee.contactMethod == ContactMethod.EMAIL
-                  ? 'EMAIL'
-                  : 'PHONE'),
-              Text(employee.contactValue),
-            ],
-          )
+          Container(
+            margin: EdgeInsets.only(right: 50.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(employee.name),
+                Text(employee.empId),
+                Text(employee.addLine1),
+                Text(employee.city),
+                Text(employee.country),
+                Text(employee.zipCode),
+                Text(employee.contactMethod == ContactMethod.EMAIL
+                    ? 'EMAIL'
+                    : 'PHONE'),
+                Text(employee.contactValue),
+                // VerticalDivider()
+              ],
+            ),
+          ),
+          // Container()
         ],
       ),
     );

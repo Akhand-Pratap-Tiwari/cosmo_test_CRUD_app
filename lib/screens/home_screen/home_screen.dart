@@ -1,6 +1,6 @@
 import 'package:cosmo_test_app/api_calling_funcs/delete_employee.dart';
 import 'package:cosmo_test_app/api_calling_funcs/list_employee.dart';
-import 'package:cosmo_test_app/screens/add_emp_screen/add_employee.dart';
+import 'package:cosmo_test_app/screens/add_emp_screen/add_employee_screen.dart';
 import 'package:flutter/material.dart';
 import '../../models/employee.dart';
 import '../../univ_design_params.dart';
@@ -28,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: empList,
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
         onPressed: () {
           Navigator.push(context,
                   MaterialPageRoute(builder: (context) => AddEmployeeScreen()))
@@ -109,6 +111,12 @@ class EmployeesListState extends State<EmployeesList> {
                   // padding: EdgeInsets.all(4.0),
                   margin: EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.pinkAccent, Colors.amber],
+                      stops: [0.0, 0.8],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
                     borderRadius: defaultBorderRadius,
                     color: Colors.amber,
                   ),
@@ -152,14 +160,12 @@ class NoEmployeesAdded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        padding: EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: Colors.purpleAccent.withOpacity(0.3),
-          borderRadius: defaultBorderRadius,
-        ),
-        child: Text(
-            "Oops looks like there is no one added in the list.\nTry to refresh or add employees."),
+      child: Column(
+        children: [
+          Image.asset("assets/img/undraw_No_data_re_kwbl.png"),
+          Text(
+              "Oops looks like there is no one added in the list.\nTry to refresh or add employees."),
+        ],
       ),
     );
   }

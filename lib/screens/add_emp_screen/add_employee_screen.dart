@@ -163,7 +163,7 @@ class EmployeeCreationFormState extends State<EmployeeCreationForm> {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.pink,
                   minimumSize: Size(double.infinity, 50),
                 ),
                 child: Text(
