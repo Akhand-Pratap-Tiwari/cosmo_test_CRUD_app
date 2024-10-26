@@ -2,7 +2,7 @@
 
 Simple CRUD app using CosmoCloud service.
 
-## (Demo Video Here)[https://drive.google.com/file/d/1_fBFUvrlwYPnarLiLpjvQM5ccP8BRgca/view?usp=drivesdk]
+## [Demo Video Here](https://drive.google.com/file/d/1_fBFUvrlwYPnarLiLpjvQM5ccP8BRgca/view?usp=drivesdk)
 
 ## Getting Started
 
